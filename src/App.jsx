@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Router from './Router'
 import { AdminContext, TokenContext, UserContext } from './util/contexts';
 import AuthService from './services/auth-service';
@@ -15,7 +15,10 @@ function App() {
       setIsAdmin(data.data.isAdmin);
     }
   }
-  fetchIsAdmin();
+  useEffect(() =>{
+    fetchIsAdmin();
+  }, [])
+
 
   return (
     <>
