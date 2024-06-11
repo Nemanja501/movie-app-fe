@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import Errors from "../../components/Errors";
-import { UserContext } from "../../util/contexts";
+import { TokenContext, UserContext } from "../../util/contexts";
 import MovieService from "../../services/movie-service";
 import { useNavigate } from "react-router-dom";
 
 export default function AddMovie() {
   const {userId} = useContext(UserContext);
+  const {token} = useContext(TokenContext);
   const [errors, setErrors] = useState({
     message: '',
     data: []
@@ -27,7 +28,7 @@ export default function AddMovie() {
     formData.append('image', document.querySelector('#image').files[0]);
     formData.append('userId', movie.userId);
     try{
-      await MovieService.addMovie(formData);
+      await MovieService.addMovie(formData, token);
       navigate('/');
     }catch(err){
       console.log(err.response.data);

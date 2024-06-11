@@ -101,3 +101,82 @@ form{
     justify-content: flex-end;
     width: 100%;
 }
+
+.movie-card{
+    width: 20rem;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin: 3rem;
+    background-color: #013030;
+    box-shadow: 0.5rem 0.5rem 3rem black;
+    border-radius: 0.5rem;
+}
+
+.movie-card img{
+    height: 80%;
+    width: 80%;
+}
+
+.movie-list{
+    display: flex;
+    margin-left: 4rem;
+}
+
+.view-movie-btn{
+    height: 2rem;
+    width: 7rem;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    background-color: #264650;
+    border: 3px solid #171b27;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 0.5rem;
+}
+
+.pagination{
+    width: 15%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.pagination-btn{
+    background-color: #264650;
+    border: 3px solid black;
+    height: 3rem;
+    width: 4rem;
+    font-size: 1.5rem;
+    border-radius: 5px;
+}
+
+.view-movie-btn:hover,
+.pagination-btn:hover{
+    color: white;
+    border: 3px solid white;
+    cursor: pointer;
+}
+
+.year{
+    margin: 1rem;
+}
+
+.poster{
+    width: 40rem;
+    height: 60rem;
+    margin: 1rem;
+}
+
+.description{
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+
+hr{
+    border: 2px solid;
+}

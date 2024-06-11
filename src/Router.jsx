@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AdminContext, TokenContext } from "./util/contexts";
 import NotFound from "./pages/NotFound";
 import AddMovie from "./pages/admin/AddMovie";
+import SingleMovie from "./pages/SingleMovie";
 
 export default function Router() {
   const {token} = useContext(TokenContext);
@@ -17,6 +18,7 @@ export default function Router() {
           <Navigation/>
           <Routes>
               <Route path="/" element={<Home/>} />
+              <Route path="/movies/:id" element={<SingleMovie/>} />
               {isAdmin && <>
                 <Route path="/add-movie" element={<AddMovie/>} />
               </>}
