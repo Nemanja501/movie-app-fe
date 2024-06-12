@@ -37,4 +37,20 @@ export default class MovieService extends HttpService{
         console.log('movie service single movie', response);
         return response;
     }
+
+    static async deleteMovie(id, token, userId){
+        const response = await this.client.request({
+            url: `admin/movies/${id}`,
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: {
+                userId
+            }
+        });
+
+        console.log('movie service delete movie', response);
+        return response;
+    }
 }

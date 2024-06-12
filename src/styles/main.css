@@ -87,7 +87,7 @@ form{
 }
 
 .left-container{
-    width: 15rem;
+    width: 25rem;
 }
 
 .right-container ul,
@@ -162,13 +162,19 @@ form{
     cursor: pointer;
 }
 
-.year{
+.subtitle{
     margin: 1rem;
 }
 
 .poster{
     width: 40rem;
     height: 60rem;
+    margin: 1rem;
+}
+
+.image{
+    width: 40rem;
+    height: 50rem;
     margin: 1rem;
 }
 
@@ -179,4 +185,18 @@ form{
 
 hr{
     border: 2px solid;
+}
+
+.delete-btn{
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: darkred;
+    border: 5px solid rgb(63, 0, 0);
+    margin: 1rem;
+}
+
+.delete-btn:hover{
+    background-color: red;
+    border: 5px solid darkred;
+    cursor: pointer;
 }

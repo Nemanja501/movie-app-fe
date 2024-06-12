@@ -29,6 +29,9 @@ export default function Navigation() {
                     <li>
                         <Link to={"/add-movie"} className="nav-link">Add Movie</Link>
                     </li>
+                    <li>
+                        <Link to={"/add-director"} className="nav-link">Add Director</Link>
+                    </li>
                 </>}
             </ul>
             </section>
