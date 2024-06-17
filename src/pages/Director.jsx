@@ -1,18 +1,23 @@
 import { useEffect, useState } from "react"
 import DirectorService from "../services/director-service";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
+import Pagination from "../components/Pagination";
 
 export default function Director() {
   const {id} = useParams();
   const [director, setDirector] = useState({});
   const [movies, setMovies] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState(searchParams.get('page') || 1);
 
   async function fetchDirector(){
     try{
-        const data = await DirectorService.getDirector(id);
+        const data = await DirectorService.getDirector(id, page);
         setDirector(data.data.director);
         setMovies(data.data.director.movies);
+        setTotalItems(data.data.totalItems);
     }catch(err){
         console.log(err);
     }
@@ -20,7 +25,8 @@ export default function Director() {
 
   useEffect(() =>{
     fetchDirector();
-  }, [])
+    setSearchParams({page: page});
+  }, [page])
 
   return (
     <div>
@@ -34,7 +40,7 @@ export default function Director() {
           {movies.map((movie, index) =>{
           return <MovieCard key={index} movieData={movie} />
         })}
-        </div></> : <p>No movies found</p>}
+        </div>{<Pagination totalItems={totalItems} setPage={setPage}/>}</> : <p>No movies found</p>}
     </div>
   )
 }

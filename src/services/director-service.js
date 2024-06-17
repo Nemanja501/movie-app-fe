@@ -25,10 +25,13 @@ export default class DirectorService extends HttpService{
         return response;
     }
 
-    static async getDirector(id){
+    static async getDirector(id, page = 1){
         const response = await this.client.request({
             url: `/directors/${id}`,
-            method: 'GET'
+            method: 'GET',
+            params: {
+                page
+            }
         });
 
         console.log('director service get director', response);

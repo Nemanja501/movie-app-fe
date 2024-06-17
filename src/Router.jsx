@@ -10,6 +10,7 @@ import AddMovie from "./pages/admin/AddMovie";
 import SingleMovie from "./pages/SingleMovie";
 import AddDirector from "./pages/admin/AddDirector";
 import Director from "./pages/Director";
+import AddActor from "./pages/admin/AddActor";
 
 export default function Router() {
   const {token} = useContext(TokenContext);
@@ -25,6 +26,7 @@ export default function Router() {
               {isAdmin && <>
                 <Route path="/add-movie" element={<AddMovie/>} />
                 <Route path="/add-director" element={<AddDirector/>} />
+                <Route path="/add-actor" element={<AddActor/>} />
               </>}
               {!token && <>
                 <Route path="/signup" element={<Signup/>} />

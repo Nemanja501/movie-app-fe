@@ -2,16 +2,16 @@ import { useContext, useState } from "react";
 import Errors from "../../components/Errors";
 import { TokenContext, UserContext } from "../../util/contexts";
 import { useNavigate } from "react-router-dom";
-import DirectorService from "../../services/director-service";
+import ActorService from "../../services/actor-service";
 
-export default function AddDirector() {
+export default function AddActor() {
   const {userId} = useContext(UserContext);
   const {token} = useContext(TokenContext);
   const [errors, setErrors] = useState({
     message: '',
     data: []
   });
-  const [director, setDirector] = useState({
+  const [actor, setActor] = useState({
     name: '',
     bio: '',
     age: '',
@@ -21,13 +21,13 @@ export default function AddDirector() {
 
   async function handleSubmit(){
     const formData = new FormData();
-    formData.append('name', director.name);
-    formData.append('bio', director.bio);
-    formData.append('age', director.age);
+    formData.append('name', actor.name);
+    formData.append('bio', actor.bio);
+    formData.append('age', actor.age);
     formData.append('image', document.querySelector('#image').files[0]);
     formData.append('userId', userId);
     try{
-      await DirectorService.addDirector(formData, token);
+      await ActorService.addActor(formData, token);
       navigate('/');
     }catch(err){
       console.log(err.response.data);
@@ -42,17 +42,16 @@ export default function AddDirector() {
 
   return (
     <div>
-        <h1 className="page-title">Add Director</h1>
+        <h1 className="page-title">Add Actor</h1>
         <form>
             <label className="form-label">Name</label>
-            <input type="text" className="form-input" name="name" value={director.name} onChange={e => setDirector({...director, name: e.target.value})}></input>
+            <input type="text" className="form-input" name="name" value={actor.name} onChange={e => setActor({...actor, name: e.target.value})}></input>
             <label className="form-label">Bio</label>
-            <textarea className="form-input" name="bio" value={director.bio} onChange={e => setDirector({...director, bio: e.target.value})}></textarea>
+            <textarea className="form-input" name="bio" value={actor.bio} onChange={e => setActor({...actor, bio: e.target.value})}></textarea>
             <label className="form-label">Age</label>
-            <input type="number" className="form-input" name="age" value={director.age} onChange={e => setDirector({...director, age: e.target.value})}></input>
+            <input type="number" className="form-input" name="age" value={actor.age} onChange={e => setActor({...actor, age: e.target.value})}></input>
             <label className="form-label">Image</label>
             <input type="file" className="form-input" name="image" id="image"></input>
-            <input type="hidden" name="userId" value={userId}></input>
             <button type="button" className="form-btn" onClick={handleSubmit}>Submit</button>
             {errors.message && <Errors message={errors.message} data={errors.data} />}
         </form>

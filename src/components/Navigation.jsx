@@ -32,6 +32,9 @@ export default function Navigation() {
                     <li>
                         <Link to={"/add-director"} className="nav-link">Add Director</Link>
                     </li>
+                    <li>
+                        <Link to={"/add-actor"} className="nav-link">Add Actor</Link>
+                    </li>
                 </>}
             </ul>
             </section>
