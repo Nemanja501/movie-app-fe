@@ -32,7 +32,7 @@ export default function Home() {
           {movies.map((movie, index) =>{
           return <MovieCard key={index} movieData={movie} />
         })}
-        </div><Pagination totalItems={totalItems} setPage={setPage}/></> : <p>No movies found</p>}
+        </div><Pagination totalItems={totalItems} setPage={setPage}/></> : <h2 className="subtitle">No movies found</h2>}
     </div>
   )
 }

@@ -1,10 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Errors from "../../components/Errors";
 import { TokenContext, UserContext } from "../../util/contexts";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import DirectorService from "../../services/director-service";
 
 export default function AddDirector() {
+  const [searchParams] = useSearchParams();
+  const [editMode, setEditMode] = useState(searchParams.get('editing'))
   const {userId} = useContext(UserContext);
   const {token} = useContext(TokenContext);
   const [errors, setErrors] = useState({
@@ -19,6 +21,30 @@ export default function AddDirector() {
   });
   const navigate = useNavigate();
 
+  useEffect(() =>{
+    if(Boolean(searchParams.get('editing')) === true){
+      setEditMode(true);
+      fetchDirectorData();
+    }else{
+      setEditMode(false);
+      setDirector({
+        name: '',
+        bio: '',
+        age: '',
+        image: '',
+      });
+    }
+  }, [searchParams.get('editing')])
+
+  async function fetchDirectorData(){
+    try{
+      const data = await DirectorService.getDirectorData(searchParams.get('id'));
+      setDirector(data.data.director);
+    }catch(err){
+      console.log(err);
+    }
+  }
+ 
   async function handleSubmit(){
     const formData = new FormData();
     formData.append('name', director.name);
@@ -27,7 +53,11 @@ export default function AddDirector() {
     formData.append('image', document.querySelector('#image').files[0]);
     formData.append('userId', userId);
     try{
-      await DirectorService.addDirector(formData, token);
+      if(editMode){
+        await DirectorService.editDirector(searchParams.get('id'), formData, token)
+      }else{
+        await DirectorService.addDirector(formData, token);
+      }
       navigate('/');
     }catch(err){
       console.log(err.response.data);
@@ -42,7 +72,7 @@ export default function AddDirector() {
 
   return (
     <div>
-        <h1 className="page-title">Add Director</h1>
+        <h1 className="page-title">{editMode ? 'Edit Director' : 'Add Director'}</h1>
         <form>
             <label className="form-label">Name</label>
             <input type="text" className="form-input" name="name" value={director.name} onChange={e => setDirector({...director, name: e.target.value})}></input>

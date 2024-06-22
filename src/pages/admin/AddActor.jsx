@@ -1,10 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Errors from "../../components/Errors";
 import { TokenContext, UserContext } from "../../util/contexts";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import ActorService from "../../services/actor-service";
 
 export default function AddActor() {
+  const [searchParams] = useSearchParams();
+  const [editMode, setEditMode] = useState(searchParams.get('editing'))
   const {userId} = useContext(UserContext);
   const {token} = useContext(TokenContext);
   const [errors, setErrors] = useState({
@@ -19,6 +21,30 @@ export default function AddActor() {
   });
   const navigate = useNavigate();
 
+  useEffect(() =>{
+    if(Boolean(searchParams.get('editing')) === true){
+      setEditMode(true);
+      fetchActorData();
+    }else{
+      setEditMode(false);
+      setActor({
+        name: '',
+        bio: '',
+        age: '',
+        image: '',
+      });
+    }
+  }, [searchParams.get('editing')])
+
+  async function fetchActorData(){
+    try{
+      const data = await ActorService.getActorData(searchParams.get('id'));
+      setActor(data.data.actor);
+    }catch(err){
+      console.log(err);
+    }
+  }
+
   async function handleSubmit(){
     const formData = new FormData();
     formData.append('name', actor.name);
@@ -27,7 +53,11 @@ export default function AddActor() {
     formData.append('image', document.querySelector('#image').files[0]);
     formData.append('userId', userId);
     try{
-      await ActorService.addActor(formData, token);
+      if(editMode){
+        await ActorService.editActor(searchParams.get('id'), formData, token);
+      }else{
+        await ActorService.addActor(formData, token);
+      }
       navigate('/');
     }catch(err){
       console.log(err.response.data);
@@ -42,7 +72,7 @@ export default function AddActor() {
 
   return (
     <div>
-        <h1 className="page-title">Add Actor</h1>
+        <h1 className="page-title">{editMode ? 'Edit Actor' : 'Add Actor'}</h1>
         <form>
             <label className="form-label">Name</label>
             <input type="text" className="form-input" name="name" value={actor.name} onChange={e => setActor({...actor, name: e.target.value})}></input>

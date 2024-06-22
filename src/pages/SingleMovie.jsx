@@ -25,12 +25,14 @@ export default function SingleMovie() {
   }
 
   async function deleteMovie(){
-    try{
-      const data = await MovieService.deleteMovie(id, token, userId);
-      console.log(data);
-      navigate('/');
-    }catch(err){
-      console.log(err);
+    if(window.confirm('Do you really want to delete this movie?')){
+      try{
+        const data = await MovieService.deleteMovie(id, token, userId);
+        console.log(data);
+        navigate('/');
+      }catch(err){
+        console.log(err);
+      }
     }
   }
 
@@ -43,14 +45,15 @@ export default function SingleMovie() {
         <h1 className="page-title">{movie.title}</h1>
         <img className="poster" src={`http://localhost:8080/${movie.posterUrl}`}></img>
         {isAdmin && <button className="delete-btn" onClick={deleteMovie}>Delete Movie</button>}
+        {isAdmin && <button className="edit-btn"><Link to={`/add-movie?id=${movie._id}&editing=true`} style={{ textDecoration: 'none' }}>Edit Movie</Link></button>}
         <h2 className="subtitle">Directed by: <Link to={`/directors/${director._id}`}>{director && director.name}</Link></h2>
-        <h2 className="subtitle">Cast: {actors.map((actor, index) =>{
+        {actors.length > 0 && <h2 className="subtitle">Cast: {actors.map((actor, index) =>{
           if(!(index + 1 == actors.length)){
-            return `${actor.name}, `
+            return <Link key={index} to={`/actors/${actor._id}`}>{actor.name + ', '}</Link>
           }else{
-            return `${actor.name}`
+            return <Link key={index} to={`/actors/${actor._id}`}>{actor.name}</Link>
           }
-        })}</h2>
+        })}</h2>}
         <h2 className="subtitle">Year of release: {movie.year}</h2>
         <h2 className="subtitle">Description: </h2>
         <p className="description">{movie.description}</p>

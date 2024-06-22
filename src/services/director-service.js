@@ -37,4 +37,44 @@ export default class DirectorService extends HttpService{
         console.log('director service get director', response);
         return response;
     }
+
+    static async getDirectorData(id){
+        const response = await this.client.request({
+            url: `/get-director-data/${id}`,
+            method: 'GET',
+        });
+
+        console.log('director service get director data', response);
+        return response;
+    }
+
+    static async editDirector(id, directorData, token){
+        const response = await this.client.request({
+            url: `/admin/edit-director/${id}`,
+            method: 'PUT',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: directorData
+        });
+
+        console.log('director service edit director', response);
+        return response;
+    }
+
+    static async deleteDirector(id, token, userId){
+        const response = await this.client.request({
+            url: `/admin/delete-director/${id}`,
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: {
+                userId
+            }
+        });
+
+        console.log('director service delete director', response);
+        return response;
+    }
 }

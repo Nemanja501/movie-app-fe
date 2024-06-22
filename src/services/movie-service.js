@@ -38,9 +38,33 @@ export default class MovieService extends HttpService{
         return response;
     }
 
+    static async getSingleMovieData(id){
+        const response = await this.client.request({
+            url: `/get-movie-data/${id}`,
+            method: 'GET',
+        });
+
+        console.log('movie service get movie data', response);
+        return response;
+    }
+
+    static async editMovie(id, movieData, token){
+        const response = await this.client.request({
+            url: `/admin/edit-movie/${id}`,
+            method: 'PUT',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: movieData
+        });
+
+        console.log('movie service edit movie', response);
+        return response;
+    }
+
     static async deleteMovie(id, token, userId){
         const response = await this.client.request({
-            url: `admin/movies/${id}`,
+            url: `admin/delete-movie/${id}`,
             method: 'POST',
             headers: {
                 Authorization: 'Bearer ' + token

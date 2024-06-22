@@ -197,3 +197,18 @@ form{
     border: 5px solid darkred;
     cursor: pointer;
 }
+
+.edit-btn{
+    display: block;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin: 1rem;
+    background-color: #264650;
+    border: 5px solid black;
+}
+
+.edit-btn:hover{
+    background-color: #386876;
+    border: 5px solid rgb(47, 47, 47);
+    cursor: pointer;
+}
