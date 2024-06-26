@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import MovieService from "../services/movie-service";
 import { AdminContext, TokenContext, UserContext } from "../util/contexts";
+import Errors from "../components/Errors";
 
 export default function SingleMovie() {
   const {id} = useParams();
@@ -11,6 +12,10 @@ export default function SingleMovie() {
   const {isAdmin} = useContext(AdminContext);
   const [director, setDirector] = useState('');
   const [actors, setActors] = useState([]);
+  const [errors, setErrors] = useState({
+    message: '',
+    data: []
+  });
   const navigate = useNavigate();
 
   async function fetchSingleMovie(){
@@ -36,6 +41,19 @@ export default function SingleMovie() {
     }
   }
 
+  async function addToWatchlist(){
+    try{
+      await MovieService.addToWatchlist(id, userId, token);
+      navigate('/watchlist');
+    }catch(err){
+      if(err.response.data){
+        const message = err.response.data.message;
+        const data = err.response.data.data;
+        setErrors({message, data});
+      }
+    }
+  }
+
   useEffect(()=>{
     fetchSingleMovie();
   }, [])
@@ -46,6 +64,8 @@ export default function SingleMovie() {
         <img className="poster" src={`http://localhost:8080/${movie.posterUrl}`}></img>
         {isAdmin && <button className="delete-btn" onClick={deleteMovie}>Delete Movie</button>}
         {isAdmin && <button className="edit-btn"><Link to={`/add-movie?id=${movie._id}&editing=true`} style={{ textDecoration: 'none' }}>Edit Movie</Link></button>}
+        {token && <button className="edit-btn" onClick={addToWatchlist}>Add to Watchlist</button>}
+        {errors.message && <Errors message={errors.message} data={errors.data} />}
         <h2 className="subtitle">Directed by: <Link to={`/directors/${director._id}`}>{director && director.name}</Link></h2>
         {actors.length > 0 && <h2 className="subtitle">Cast: {actors.map((actor, index) =>{
           if(!(index + 1 == actors.length)){

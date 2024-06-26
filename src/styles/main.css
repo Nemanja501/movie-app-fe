@@ -16,7 +16,6 @@ html {
 
 .navbar{
     display: flex;
-    justify-content: space-between;
     font-size: 1.5rem;
     padding: 1rem;  
     background-color: #264650;
@@ -31,9 +30,17 @@ html {
 
 .nav-link{
     text-decoration: none;
+    margin-right: 2rem;
 }
 
-.nav-link:hover{
+.nav-link-right{
+    text-decoration: none;
+    margin-right: 0rem;
+    margin-left: 2rem;
+}
+
+.nav-link:hover,
+.nav-link-right:hover{
     color: white;
 }
 
@@ -83,17 +90,22 @@ form{
 }
 
 .right-container{
-    width: 12rem;
+    width: 15rem;
+    margin-left: auto;
 }
 
 .left-container{
     width: 35rem;
 }
 
+.left-container-admin{
+    width: 50rem;
+}
+
 .right-container ul,
-.left-container ul{
+.left-container ul,
+.left-container-admin ul{
     display: flex;
-    justify-content: space-between;
 }
 
 .nav-link-logout{
@@ -104,7 +116,7 @@ form{
 
 .movie-card{
     width: 20rem;
-    height: 30rem;
+    height: 35rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -126,7 +138,8 @@ form{
     margin-left: 4rem;
 }
 
-.view-movie-btn{
+.view-movie-btn,
+.mark-as-watched-btn{
     height: 2rem;
     width: 7rem;
     font-size: 1.2rem;
@@ -137,6 +150,10 @@ form{
     text-decoration: none;
     text-align: center;
     padding-top: 0.5rem;
+}
+
+.mark-as-watched-btn{
+    height: 4rem;
 }
 
 .pagination{
@@ -156,7 +173,8 @@ form{
 }
 
 .view-movie-btn:hover,
-.pagination-btn:hover{
+.pagination-btn:hover,
+.mark-as-watched-btn:hover{
     color: white;
     border: 3px solid white;
     cursor: pointer;
@@ -211,4 +229,34 @@ form{
     background-color: #386876;
     border: 5px solid rgb(47, 47, 47);
     cursor: pointer;
+}
+
+.watched-movie-card{
+    width: 35rem;
+    height: 4rem;
+    background-color: #013030;
+    box-shadow: 0.5rem 0.5rem 3rem black;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.fa-star{
+    font-size: 2rem;
+}
+
+.fa-star:hover{
+    cursor: pointer;
+}
+
+.active-star{
+    color: orange;
+}
+
+.rating-div{
+    display: flex;
+}
+
+i{
+    margin-left: 1rem;
 }

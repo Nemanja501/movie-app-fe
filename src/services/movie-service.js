@@ -77,4 +77,91 @@ export default class MovieService extends HttpService{
         console.log('movie service delete movie', response);
         return response;
     }
+
+    static async addToWatchlist(movieId, userId, token){
+        const response = await this.client.request({
+            url: '/add-to-watchlist',
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: {
+                movieId,
+                userId
+            }
+        });
+
+        console.log('movie service add to watchlist', response);
+        return response;
+    }
+
+    static async getWatchlist(userId, token, page = 1){
+        const response = await this.client.request({
+            url: '/watchlist',
+            method: 'POST',
+            params: {
+                page
+            },
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: {
+                userId
+            }
+        });
+
+        console.log('movie service get watchlist', response);
+        return response;
+    }
+
+    static async markAsWatched(userId, movieId, token){
+        const response = await this.client.request({
+            url: '/mark-as-watched',
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: {
+                userId,
+                movieId
+            }
+        });
+
+        console.log('movie service mark as watched', response);
+        return response;
+    }
+
+    static async getWatchedMovies(userId, token){
+        const response = await this.client.request({
+            url: '/watched-movies',
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: {
+                userId
+            }
+        });
+
+        console.log('movie service get watched movies', response);
+        return response;
+    }
+
+    static async addRating(rating, userId, movieId, token){
+        const response = await this.client.request({
+            url: '/add-rating',
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: {
+                rating,
+                userId,
+                movieId
+            }
+        });
+
+        console.log('movie service add rating', response);
+        return response;
+    }
 }

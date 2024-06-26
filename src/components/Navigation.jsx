@@ -20,7 +20,7 @@ export default function Navigation() {
   return (
     <div>
         <nav className="navbar">
-            <section className="left-container">
+            <section className={isAdmin ? 'left-container-admin' : 'left-container'}>
             <ul>
                 <li>
                     <Link to={"/"} className="nav-link">Home</Link>
@@ -36,20 +36,28 @@ export default function Navigation() {
                         <Link to={"/add-actor"} className="nav-link">Add Actor</Link>
                     </li>
                 </>}
+                {token && <>
+                    <li>
+                        <Link to={"/watchlist"} className="nav-link">Watchlist</Link>
+                    </li>
+                    <li>
+                        <Link to={"/watched-movies"} className="nav-link">Watched Movies</Link>
+                    </li>
+                </>}
             </ul>
             </section>
             <section className="right-container">
                 <ul>
                     {!token ? <>
                         <li>
-                            <Link to={"/login"} className="nav-link">Log In</Link>
+                            <Link to={"/login"} className="nav-link-right">Log In</Link>
                         </li>
                         <li>
-                            <Link to={"/signup"} className="nav-link">Sign Up</Link>
+                            <Link to={"/signup"} className="nav-link-right">Sign Up</Link>
                         </li>
                     </> : <>
                         <li className="nav-link-logout">
-                            <a href="#" onClick={logout} className="nav-link">Log Out</a>
+                            <a href="#" onClick={logout} className="nav-link-right">Log Out</a>
                         </li>
                     </>}
                 </ul>

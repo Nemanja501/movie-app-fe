@@ -12,6 +12,8 @@ import AddDirector from "./pages/admin/AddDirector";
 import Director from "./pages/Director";
 import AddActor from "./pages/admin/AddActor";
 import Actor from "./pages/Actor";
+import Watchlist from "./pages/Watchlist";
+import WatchedMovies from "./pages/WatchedMovies";
 
 export default function Router() {
   const {token} = useContext(TokenContext);
@@ -33,6 +35,10 @@ export default function Router() {
               {!token && <>
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/login" element={<Login/>} />
+              </>}
+              {token && <>
+                <Route path="/watchlist" element={<Watchlist/>} />
+                <Route path="/watched-movies" element={<WatchedMovies/>} />
               </>}
               <Route path="*" element={<NotFound/>} />
           </Routes>
