@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react"
 import MovieService from "../services/movie-service";
 import { TokenContext, UserContext } from "../util/contexts";
+import { Link } from "react-router-dom";
 
 export default function WatchedMovieCard({movieData}) {
   const {userId} = useContext(UserContext);
@@ -14,8 +15,19 @@ export default function WatchedMovieCard({movieData}) {
     }
   }
 
+  async function removeFromWatchedMovies(){
+    if(window.confirm('Do you want to remove this movie from watched movies?')){
+      try{
+        await MovieService.removeFromWatched(userId, movieData.movie._id, token);
+        window.location.reload();
+      }catch(err){
+        console.log(err);
+      }
+    }
+  }
+
   useEffect(()=>{
-    const stars = document.querySelectorAll('i');
+    const stars = document.querySelectorAll(`#stars-${movieData.movie._id} > i`);
     if(movieData.rating){
       for(let i = 0; i < movieData.rating; i++){
         stars[i].classList.add('active-star');
@@ -37,16 +49,17 @@ export default function WatchedMovieCard({movieData}) {
 
   return (
     <div className="watched-movie-card">
-        <h2>{movieData.movie.title} {`(${movieData.movie.year})`}</h2>
+        <h2><Link to={`/movies/${movieData.movie._id}`}>{movieData.movie.title} {`(${movieData.movie.year})`}</Link></h2>
         <div className="rating-div">
             <h2>Your rating: </h2>
-            <div className="ratings">
+            <div id={`stars-${movieData.movie._id}`} className="ratings">
               <i className="fa fa-solid fa-star"></i>
               <i className="fa fa-solid fa-star"></i>
               <i className="fa fa-solid fa-star"></i>
               <i className="fa fa-solid fa-star"></i>
               <i className="fa fa-solid fa-star"></i>
             </div>
+            <button onClick={removeFromWatchedMovies} id="remove-from-watched-btn" className="delete-btn">X</button>
         </div>
     </div>
   )

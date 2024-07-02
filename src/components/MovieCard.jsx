@@ -17,13 +17,25 @@ export default function MovieCard({movieData, isInWatchlist}) {
     }
   }
 
+  async function removeFromWatchlist(){
+    if(window.confirm('Do you want to remove this movie from your watchlist?')){
+      try{
+        await MovieService.removeFromWatchlist(userId, movieData._id, token);
+        window.location.reload();
+      }catch(err){
+        console.log(err);
+      }
+    }
+  }
+
   return (
-    <div className="movie-card">
+    <div className={isInWatchlist ? 'movie-card watchlist' : 'movie-card'}>
         <h3>{movieData.title}</h3>
         <h4>{movieData.year}</h4>
         <img src={`http://localhost:8080/${movieData.posterUrl}`}></img>
         <Link to={`/movies/${movieData._id}`} className="view-movie-btn">View Movie</Link>
         {isInWatchlist && <button onClick={markAsWatched} className="mark-as-watched-btn">Mark As Watched</button>}
+        {isInWatchlist && <button onClick={removeFromWatchlist} className="delete-btn">X</button>}
     </div>
   )
 }

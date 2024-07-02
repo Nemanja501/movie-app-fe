@@ -114,6 +114,23 @@ export default class MovieService extends HttpService{
         return response;
     }
 
+    static async removeFromWatchlist(userId, movieId, token){
+        const response = await this.client.request({
+            url: '/remove-from-watchlist',
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: {
+                movieId,
+                userId
+            }
+        });
+
+        console.log('movie service remove from watchlist', response);
+        return response;
+    }
+
     static async markAsWatched(userId, movieId, token){
         const response = await this.client.request({
             url: '/mark-as-watched',
@@ -144,6 +161,23 @@ export default class MovieService extends HttpService{
         });
 
         console.log('movie service get watched movies', response);
+        return response;
+    }
+
+    static async removeFromWatched(userId, movieId, token){
+        const response = await this.client.request({
+            url: '/remove-from-watched',
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: {
+                movieId,
+                userId
+            }
+        });
+
+        console.log('movie service remove from watched', response);
         return response;
     }
 

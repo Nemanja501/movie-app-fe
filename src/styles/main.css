@@ -128,6 +128,11 @@ form{
     border-radius: 0.5rem;
 }
 
+.watchlist{
+    width: 20rem;
+    height: 40rem;
+}
+
 .movie-card img{
     height: 80%;
     width: 80%;
@@ -232,7 +237,7 @@ form{
 }
 
 .watched-movie-card{
-    width: 35rem;
+    width: 30rem;
     height: 4rem;
     background-color: #013030;
     box-shadow: 0.5rem 0.5rem 3rem black;
@@ -247,6 +252,7 @@ form{
 
 .fa-star:hover{
     cursor: pointer;
+    color: rgb(249, 212, 143);
 }
 
 .active-star{
@@ -259,4 +265,10 @@ form{
 
 i{
     margin-left: 1rem;
+}
+
+#remove-from-watched-btn{
+    position: relative;
+    bottom: 2rem;
+    left: 1rem;
 }

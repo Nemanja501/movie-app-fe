@@ -33,7 +33,7 @@ export default function Watchlist() {
         <h1 className="page-title">Watchlist</h1>
         {movies.length > 0 ? <><div className="movie-list">
           {movies.map((movie, index) =>{
-          return <MovieCard key={index} movieData={movie} isInWatchlist={true}/>
+          return <MovieCard key={index} movieData={movie} isInWatchlist={true} />
         })}
         </div>{<Pagination totalItems={totalItems} setPage={setPage}/>}</> : <h2 className="subtitle">No movies in watchlist</h2>}
     </div>
