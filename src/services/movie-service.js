@@ -198,4 +198,35 @@ export default class MovieService extends HttpService{
         console.log('movie service add rating', response);
         return response;
     }
+
+    static async getRating(userId, movieId, token){
+        const response = await this.client.request({
+            url: '/get-rating',
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: {
+                userId,
+                movieId
+            }
+        });
+
+        console.log('movie service get rating', response);
+        return response;
+    }
+
+    static async addReview(reviewData, token){
+        const response = await this.client.request({
+            url: '/add-review',
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: reviewData
+        });
+
+        console.log('movie service add review', response);
+        return response;
+    }
 }

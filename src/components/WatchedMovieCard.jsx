@@ -50,7 +50,7 @@ export default function WatchedMovieCard({movieData}) {
   return (
     <div className="watched-movie-card">
         <h2><Link to={`/movies/${movieData.movie._id}`}>{movieData.movie.title} {`(${movieData.movie.year})`}</Link></h2>
-        <div className="rating-div">
+        <div id="review-div" className="rating-div">
             <h2>Your rating: </h2>
             <div id={`stars-${movieData.movie._id}`} className="ratings">
               <i className="fa fa-solid fa-star"></i>

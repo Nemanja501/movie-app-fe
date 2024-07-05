@@ -3,6 +3,8 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import MovieService from "../services/movie-service";
 import { AdminContext, TokenContext, UserContext } from "../util/contexts";
 import Errors from "../components/Errors";
+import AddReview from "../components/AddReview";
+import Reviews from "../components/Reviews";
 
 export default function SingleMovie() {
   const {id} = useParams();
@@ -12,6 +14,8 @@ export default function SingleMovie() {
   const {isAdmin} = useContext(AdminContext);
   const [director, setDirector] = useState('');
   const [actors, setActors] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
   const [errors, setErrors] = useState({
     message: '',
     data: []
@@ -24,6 +28,7 @@ export default function SingleMovie() {
         setMovie(data.data.movie);
         setDirector(data.data.movie.director);
         setActors(data.data.movie.cast);
+        setReviews(data.data.movie.reviews);
     }catch(err){
         console.log(err);
     }
@@ -77,6 +82,9 @@ export default function SingleMovie() {
         <h2 className="subtitle">Year of release: {movie.year}</h2>
         <h2 className="subtitle">Description: </h2>
         <p className="description">{movie.description}</p>
+        {token && <button className="edit-btn" onClick={() => setShowPopup(true)}>Add a Review</button>}
+        {showPopup && <AddReview setShowPopup={setShowPopup} movieId={id}/>}
+        <Reviews reviews={reviews} />
     </div>
   )
 }
