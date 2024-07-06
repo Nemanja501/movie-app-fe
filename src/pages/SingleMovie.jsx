@@ -71,6 +71,7 @@ export default function SingleMovie() {
         {isAdmin && <button className="edit-btn"><Link to={`/add-movie?id=${movie._id}&editing=true`} style={{ textDecoration: 'none' }}>Edit Movie</Link></button>}
         {token && <button className="edit-btn" onClick={addToWatchlist}>Add to Watchlist</button>}
         {errors.message && <Errors message={errors.message} data={errors.data} />}
+        {movie.averageRating && <h2 className="subtitle">Average rating: {movie.averageRating}/5</h2>}
         <h2 className="subtitle">Directed by: <Link to={`/directors/${director._id}`}>{director && director.name}</Link></h2>
         {actors.length > 0 && <h2 className="subtitle">Cast: {actors.map((actor, index) =>{
           if(!(index + 1 == actors.length)){

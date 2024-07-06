@@ -15,7 +15,7 @@ export default function Watchlist() {
 
   async function fetchWatchlist(){
     try{
-      const data = await MovieService.getWatchlist(userId, token);
+      const data = await MovieService.getWatchlist(userId, token, page);
       setMovies(data.data.user.watchlist);
       setTotalItems(data.data.totalItems);
     }catch(err){

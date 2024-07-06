@@ -34,7 +34,10 @@ export default function WatchedMovieCard({movieData}) {
       }
     }
     stars.forEach((star1, index1) =>{
-      star1.addEventListener('click', () =>{
+      star1.addEventListener('click', function (e){
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        console.log(e);
         addRating(index1 + 1);
         stars.forEach((star2, index2) =>{
           if(index2 <= index1){
