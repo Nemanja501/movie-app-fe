@@ -250,7 +250,7 @@ form{
     font-size: 2rem;
 }
 
-.fa-star:hover{
+.clickable-star:hover{
     cursor: pointer;
     color: rgb(249, 212, 143);
 }

@@ -76,11 +76,11 @@ export default function AddReview({setShowPopup, movieId}) {
             <div id="add-review-div" className="rating-div">
                 <h2>Your rating: </h2>
                 <div id={`add-review-stars-${movieId}`} className="ratings">
-                  <i className="fa fa-solid fa-star"></i>
-                  <i className="fa fa-solid fa-star"></i>
-                  <i className="fa fa-solid fa-star"></i>
-                  <i className="fa fa-solid fa-star"></i>
-                  <i className="fa fa-solid fa-star"></i>
+                  <i className="fa fa-solid fa-star clickable-star"></i>
+                  <i className="fa fa-solid fa-star clickable-star"></i>
+                  <i className="fa fa-solid fa-star clickable-star"></i>
+                  <i className="fa fa-solid fa-star clickable-star"></i>
+                  <i className="fa fa-solid fa-star clickable-star"></i>
                 </div>
             </div>
             <label id="review-label" className="form-label">Title</label>

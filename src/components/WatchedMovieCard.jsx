@@ -56,11 +56,11 @@ export default function WatchedMovieCard({movieData}) {
         <div id="review-div" className="rating-div">
             <h2>Your rating: </h2>
             <div id={`stars-${movieData.movie._id}`} className="ratings">
-              <i className="fa fa-solid fa-star"></i>
-              <i className="fa fa-solid fa-star"></i>
-              <i className="fa fa-solid fa-star"></i>
-              <i className="fa fa-solid fa-star"></i>
-              <i className="fa fa-solid fa-star"></i>
+              <i className="fa fa-solid fa-star clickable-star"></i>
+              <i className="fa fa-solid fa-star clickable-star"></i>
+              <i className="fa fa-solid fa-star clickable-star"></i>
+              <i className="fa fa-solid fa-star clickable-star"></i>
+              <i className="fa fa-solid fa-star clickable-star"></i>
             </div>
             <button onClick={removeFromWatchedMovies} id="remove-from-watched-btn" className="delete-btn">X</button>
         </div>
