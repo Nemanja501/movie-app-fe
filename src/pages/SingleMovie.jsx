@@ -1,14 +1,18 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import MovieService from "../services/movie-service";
 import { AdminContext, TokenContext, UserContext } from "../util/contexts";
 import Errors from "../components/Errors";
 import AddReview from "../components/AddReview";
 import Reviews from "../components/Reviews";
+import Pagination from "../components/Pagination";
 
 export default function SingleMovie() {
   const {id} = useParams();
   const [movie, setMovie] = useState({});
+  const [totalItems, setTotalItems] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState(searchParams.get('page') || 1);
   const {token} = useContext(TokenContext);
   const {userId} = useContext(UserContext);
   const {isAdmin} = useContext(AdminContext);
@@ -24,11 +28,12 @@ export default function SingleMovie() {
 
   async function fetchSingleMovie(){
     try{
-        const data = await MovieService.getSingleMovie(id);
+        const data = await MovieService.getSingleMovie(id, page);
         setMovie(data.data.movie);
         setDirector(data.data.movie.director);
         setActors(data.data.movie.cast);
         setReviews(data.data.movie.reviews);
+        setTotalItems(data.data.totalItems);
     }catch(err){
         console.log(err);
     }
@@ -61,7 +66,8 @@ export default function SingleMovie() {
 
   useEffect(()=>{
     fetchSingleMovie();
-  }, [])
+    setSearchParams({page: page});
+  }, [page])
 
   return (
     <div>
@@ -86,6 +92,7 @@ export default function SingleMovie() {
         {token && <button className="edit-btn" onClick={() => setShowPopup(true)}>Add a Review</button>}
         {showPopup && <AddReview setShowPopup={setShowPopup} movieId={id}/>}
         <Reviews reviews={reviews} />
+        {reviews.length > 0 && <Pagination setPage={setPage} totalItems={totalItems} itemsPerPage={8} />}
     </div>
   )
 }

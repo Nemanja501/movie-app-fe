@@ -28,10 +28,13 @@ export default class MovieService extends HttpService{
         return response;
     }
 
-    static async getSingleMovie(id){
+    static async getSingleMovie(id, page = 1){
         const response = await this.client.request({
             url: `/movies/${id}`,
             method: 'GET',
+            params: {
+                page
+            }
         });
 
         console.log('movie service single movie', response);
@@ -148,7 +151,7 @@ export default class MovieService extends HttpService{
         return response;
     }
 
-    static async getWatchedMovies(userId, token){
+    static async getWatchedMovies(userId, token, page = 1){
         const response = await this.client.request({
             url: '/watched-movies',
             method: 'POST',
@@ -157,6 +160,9 @@ export default class MovieService extends HttpService{
             },
             data: {
                 userId
+            },
+            params: {
+                page
             }
         });
 

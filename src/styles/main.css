@@ -168,6 +168,12 @@ form{
     margin: auto;
 }
 
+#pagination-watched-movies{
+    position: absolute;
+    bottom: 1rem;
+    left: 40vw;
+}
+
 .pagination-btn{
     background-color: #264650;
     border: 3px solid black;
@@ -237,13 +243,27 @@ form{
 }
 
 .watched-movie-card{
-    width: 30rem;
+    width: 33rem;
     height: 4rem;
     background-color: #013030;
     box-shadow: 0.5rem 0.5rem 3rem black;
     border-radius: 1rem;
     padding: 1rem;
     margin: 1rem;
+}
+
+.watched-movie-page{
+    position: relative;
+}
+
+.watched-movie-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 80vh;
+    width: 90vw;
+    
 }
 
 .fa-star{
@@ -270,7 +290,7 @@ i{
 #remove-from-watched-btn{
     position: relative;
     bottom: 2rem;
-    left: 1rem;
+    left: 4rem;
 }
 
 .popup{
