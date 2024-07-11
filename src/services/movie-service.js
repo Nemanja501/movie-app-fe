@@ -235,4 +235,20 @@ export default class MovieService extends HttpService{
         console.log('movie service add review', response);
         return response;
     }
+
+    static async deleteReview(review, token){
+        const response = await this.client.request({
+            url: '/delete-review',
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            data: {
+                review
+            }
+        });
+
+        console.log('movie service delete review', response);
+        return response;
+    }
 }

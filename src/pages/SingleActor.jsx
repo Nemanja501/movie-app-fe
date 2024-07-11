@@ -5,7 +5,7 @@ import MovieCard from "../components/MovieCard";
 import Pagination from "../components/Pagination";
 import { AdminContext, TokenContext, UserContext } from "../util/contexts";
 
-export default function Actor() {
+export default function SingleActor() {
   const {id} = useParams();
   const [actor, setActor] = useState({});
   const [movies, setMovies] = useState([]);

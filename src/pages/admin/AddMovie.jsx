@@ -31,8 +31,8 @@ export default function AddMovie() {
 
   async function fetchDirectorsAndActors(){
     try{
-      const directorData = await DirectorService.getDirectors();
-      const actorData = await ActorService.getActors();
+      const directorData = await DirectorService.getDirectorsData();
+      const actorData = await ActorService.getActorsData();
       setDirectors(directorData.data.directors);
       setActors(actorData.data.actors);
     }catch(err){

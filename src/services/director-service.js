@@ -15,10 +15,13 @@ export default class DirectorService extends HttpService{
         return response;
     }
 
-    static async getDirectors(){
+    static async getDirectors(page = 1){
         const response = await this.client.request({
-            url: '/get-directors',
-            method: 'GET'
+            url: `/directors/`,
+            method: 'GET',
+            params: {
+                page
+            }
         });
 
         console.log('director service get directors', response);
@@ -35,6 +38,16 @@ export default class DirectorService extends HttpService{
         });
 
         console.log('director service get director', response);
+        return response;
+    }
+
+    static async getDirectorsData(){
+        const response = await this.client.request({
+            url: '/get-directors-data',
+            method: 'GET'
+        });
+
+        console.log('director service get directors data', response);
         return response;
     }
 

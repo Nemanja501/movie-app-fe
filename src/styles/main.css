@@ -14,6 +14,8 @@ html {
     font-size: 4rem;
 }
 
+/* || Navbar  */
+
 .navbar{
     display: flex;
     font-size: 1.5rem;
@@ -21,8 +23,6 @@ html {
     background-color: #264650;
     box-shadow: 0 1rem 1rem -1rem black;
 }
-
-
 
 .navbar ul{
     list-style-type: none;   
@@ -43,6 +43,67 @@ html {
 .nav-link-right:hover{
     color: white;
 }
+
+.nav-link-logout{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.dropdown-content{
+    display: none;
+    padding: 0.5rem;
+    flex-direction: column;
+    text-align: center;
+    width: 15rem;
+    position: absolute;
+    top: 1.8rem;
+    left: -2rem;
+    border-top: 0;
+    border-radius: 5px;
+    background-color: #264650;
+}
+
+.dropdown-content:hover{
+    display: flex;
+}
+
+.dropdown{
+    position: relative;
+}
+
+.dropbtn:hover{
+    cursor: pointer;
+}
+
+.dropbtn:hover .fa-caret-down{
+    color: white;
+}
+
+.dropdown:hover .dropdown-content{
+    display: flex;
+}
+
+.right-container{
+    width: 15rem;
+    margin-left: auto;
+}
+
+.left-container{
+    width: 50rem;
+}
+
+.left-container-admin{
+    width: 60rem;
+}
+
+.right-container ul,
+.left-container ul,
+.left-container-admin ul{
+    display: flex;
+}
+
+/* || Forms */
 
 form{
     display: flex;
@@ -89,32 +150,10 @@ form{
     padding: 2rem;
 }
 
-.right-container{
-    width: 15rem;
-    margin-left: auto;
-}
+/* || Cards */
 
-.left-container{
-    width: 35rem;
-}
-
-.left-container-admin{
-    width: 50rem;
-}
-
-.right-container ul,
-.left-container ul,
-.left-container-admin ul{
-    display: flex;
-}
-
-.nav-link-logout{
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-}
-
-.movie-card{
+.movie-card,
+.actor-director-card{
     width: 20rem;
     height: 35rem;
     display: flex;
@@ -128,6 +167,16 @@ form{
     border-radius: 0.5rem;
 }
 
+.watched-movie-card{
+    width: 33rem;
+    height: 4rem;
+    background-color: #013030;
+    box-shadow: 0.5rem 0.5rem 3rem black;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+
 .watchlist{
     width: 20rem;
     height: 40rem;
@@ -138,28 +187,17 @@ form{
     width: 80%;
 }
 
+.actor-director-card img{
+    height: 80%;
+    width: 90%;
+}
+
 .movie-list{
     display: flex;
     margin-left: 4rem;
 }
 
-.view-movie-btn,
-.mark-as-watched-btn{
-    height: 2rem;
-    width: 7rem;
-    font-size: 1.2rem;
-    margin-top: 0.5rem;
-    background-color: #264650;
-    border: 3px solid #171b27;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
-    padding-top: 0.5rem;
-}
-
-.mark-as-watched-btn{
-    height: 4rem;
-}
+/* || Pagination */
 
 .pagination{
     width: 15%;
@@ -185,11 +223,14 @@ form{
 
 .view-movie-btn:hover,
 .pagination-btn:hover,
-.mark-as-watched-btn:hover{
+.mark-as-watched-btn:hover,
+.view-director-btn:hover{
     color: white;
     border: 3px solid white;
     cursor: pointer;
 }
+
+/* || Movie, Actor and Director Pages */
 
 .subtitle{
     margin: 1rem;
@@ -202,7 +243,7 @@ form{
 }
 
 .image{
-    width: 40rem;
+    width: 35rem;
     height: 50rem;
     margin: 1rem;
 }
@@ -210,6 +251,32 @@ form{
 .description{
     margin: 1rem;
     font-size: 1.5rem;
+}
+
+/* || Buttons  */
+
+.view-movie-btn,
+.mark-as-watched-btn,
+.view-director-btn{
+    height: 2rem;
+    width: 7rem;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    background-color: #264650;
+    border: 3px solid #171b27;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 0.5rem;
+}
+
+.mark-as-watched-btn{
+    height: 4rem;
+}
+
+.view-director-btn{
+    height: 3rem;
+    padding-bottom: 0.5rem;
 }
 
 .delete-btn{
@@ -227,7 +294,14 @@ form{
     cursor: pointer;
 }
 
-.edit-btn{
+#delete-review-btn{
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+}
+
+.edit-btn,
+.watchlist-btn{
     display: block;
     padding: 0.5rem;
     font-size: 1rem;
@@ -236,21 +310,24 @@ form{
     border: 5px solid black;
 }
 
-.edit-btn:hover{
+.watchlist-btn{
+    display: inline;
+}
+
+.edit-btn:hover,
+.watchlist-btn:hover{
     background-color: #386876;
     border: 5px solid rgb(47, 47, 47);
     cursor: pointer;
 }
 
-.watched-movie-card{
-    width: 33rem;
-    height: 4rem;
-    background-color: #013030;
-    box-shadow: 0.5rem 0.5rem 3rem black;
-    border-radius: 1rem;
-    padding: 1rem;
-    margin: 1rem;
+#remove-from-watched-btn{
+    position: relative;
+    bottom: 2rem;
+    left: 4rem;
 }
+
+/* || Watched movie page  */
 
 .watched-movie-page{
     position: relative;
@@ -265,6 +342,8 @@ form{
     width: 90vw;
     
 }
+
+/* || Star Ratings */
 
 .fa-star{
     font-size: 2rem;
@@ -287,11 +366,7 @@ i{
     margin-left: 1rem;
 }
 
-#remove-from-watched-btn{
-    position: relative;
-    bottom: 2rem;
-    left: 4rem;
-}
+/* || Review */
 
 .popup{
     position: fixed;
@@ -366,13 +441,14 @@ i{
 }
 
 #review{
+    position: relative;
     overflow: hidden;
 }
 
 #review-errors{
     position: relative;
     left: 18rem;
-    top: 6rem;
+    top: 8rem;
     width: 20rem;
     border-radius: 3rem;
     box-shadow: 0.5rem 0.5rem 3rem black;

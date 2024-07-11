@@ -4,8 +4,8 @@ import { AdminContext, TokenContext, UserContext } from './util/contexts';
 import AuthService from './services/auth-service';
 
 function App() {
-  const [token, setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token') : '');
-  const [userId, setUserId] = useState(localStorage.getItem('userId') ? localStorage.getItem('userId') : '');
+  const [token, setToken] = useState(localStorage.getItem('token') || '');
+  const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
   const [isAdmin, setIsAdmin] = useState(false);
 
 

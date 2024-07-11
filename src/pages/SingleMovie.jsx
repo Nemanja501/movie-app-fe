@@ -64,6 +64,19 @@ export default function SingleMovie() {
     }
   }
 
+  async function markMovieAsWatched(){
+    try{
+      await MovieService.markAsWatched(userId, id, token);
+      navigate('/watched-movies');
+    }catch(err){
+      if(err.response.data){
+        const message = err.response.data.message;
+        const data = err.response.data.data;
+        setErrors({message, data});
+      }
+    }
+  }
+
   useEffect(()=>{
     fetchSingleMovie();
     setSearchParams({page: page});
@@ -75,7 +88,9 @@ export default function SingleMovie() {
         <img className="poster" src={`http://localhost:8080/${movie.posterUrl}`}></img>
         {isAdmin && <button className="delete-btn" onClick={deleteMovie}>Delete Movie</button>}
         {isAdmin && <button className="edit-btn"><Link to={`/add-movie?id=${movie._id}&editing=true`} style={{ textDecoration: 'none' }}>Edit Movie</Link></button>}
-        {token && <button className="edit-btn" onClick={addToWatchlist}>Add to Watchlist</button>}
+        {!isAdmin && <br/>}
+        {token && <button className="watchlist-btn" onClick={addToWatchlist}>Add to Watchlist</button>}
+        {token && <button className="watchlist-btn" onClick={markMovieAsWatched}>Mark As Watched</button>}
         {errors.message && <Errors message={errors.message} data={errors.data} />}
         {movie.averageRating && <h2 className="subtitle">Average rating: {movie.averageRating}/5</h2>}
         <h2 className="subtitle">Directed by: <Link to={`/directors/${director._id}`}>{director && director.name}</Link></h2>

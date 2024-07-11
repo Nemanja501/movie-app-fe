@@ -15,17 +15,20 @@ export default class ActorService extends HttpService{
         return response;
     }
 
-    static async getActors(){
+    static async getActors(page = 1){
         const response = await this.client.request({
-            url: '/get-actors',
-            method: 'GET'
+            url: `/actors`,
+            method: 'GET',
+            params: {
+                page
+            }
         });
 
         console.log('actor service get actors', response);
         return response;
     }
 
-    static async getActor(id, page){
+    static async getActor(id, page = 1){
         const response = await this.client.request({
             url: `/actors/${id}`,
             method: 'GET',
@@ -35,6 +38,16 @@ export default class ActorService extends HttpService{
         });
 
         console.log('actor service get actor', response);
+        return response;
+    }
+
+    static async getActorsData(){
+        const response = await this.client.request({
+            url: '/get-actors-data',
+            method: 'GET'
+        });
+
+        console.log('actor service get actors data', response);
         return response;
     }
 

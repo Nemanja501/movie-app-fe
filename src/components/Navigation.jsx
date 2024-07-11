@@ -24,18 +24,9 @@ export default function Navigation() {
             <ul>
                 <li>
                     <Link to={"/"} className="nav-link">Home</Link>
+                    <Link to={"/actors"} className="nav-link">Actors</Link>
+                    <Link to={"/directors"} className="nav-link">Directors</Link>
                 </li>
-                {isAdmin && <>
-                    <li>
-                        <Link to={"/add-movie"} className="nav-link">Add Movie</Link>
-                    </li>
-                    <li>
-                        <Link to={"/add-director"} className="nav-link">Add Director</Link>
-                    </li>
-                    <li>
-                        <Link to={"/add-actor"} className="nav-link">Add Actor</Link>
-                    </li>
-                </>}
                 {token && <>
                     <li>
                         <Link to={"/watchlist"} className="nav-link">Watchlist</Link>
@@ -43,6 +34,21 @@ export default function Navigation() {
                     <li>
                         <Link to={"/watched-movies"} className="nav-link">Watched Movies</Link>
                     </li>
+                </>}
+                {isAdmin && <>
+                    <div className="dropdown">
+                        <a className="dropbtn nav-link">Admin Options
+                            <i className="fa fa-caret-down"></i>
+                        </a>
+                        <div className="dropdown-content">
+                            <hr/>
+                            <Link to={"/add-movie"} className="nav-link">Add Movie</Link>
+                            <hr/>
+                            <Link to={"/add-director"} className="nav-link">Add Director</Link>
+                            <hr/>
+                            <Link to={"/add-actor"} className="nav-link">Add Actor</Link>
+                        </div>
+                    </div>
                 </>}
             </ul>
             </section>

@@ -16,7 +16,7 @@ export default function WatchedMovieCard({movieData}) {
   }
 
   async function removeFromWatchedMovies(){
-    if(window.confirm('Do you want to remove this movie from watched movies?')){
+    if(window.confirm('Do you want to remove this movie from watched movies? This will delete all your reviews of the movie')){
       try{
         await MovieService.removeFromWatched(userId, movieData.movie._id, token);
         window.location.reload();

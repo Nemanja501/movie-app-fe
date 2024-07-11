@@ -6,10 +6,11 @@ import Errors from "./Errors";
 export default function AddReview({setShowPopup, movieId}) {
   const {token} = useContext(TokenContext);
   const {userId} = useContext(UserContext);
+  const [rating, setRating] = useState(0)
   const [review, setReview] = useState({
     title: '',
     content: '',
-    rating: 0,
+    rating: rating,
     userId,
     movieId
   });
@@ -22,17 +23,17 @@ export default function AddReview({setShowPopup, movieId}) {
   async function getRating(){
     try{
       const data = await MovieService.getRating(userId, movieId, token);
-      const rating = data.data.rating;
+      const ratingData = data.data.rating;
       const stars = document.querySelectorAll(`#add-review-stars-${movieId} > i`);
-      if(rating > 0){
-        setReview({...review, rating: rating});
-        for(let i = 0; i < rating; i++){
+      if(ratingData > 0){
+        setRating(ratingData);
+        for(let i = 0; i < ratingData; i++){
           stars[i].classList.add('active-star');
         }
       }
       stars.forEach((star1, index1) => {
         star1.addEventListener('click', () =>{
-          setReview({...review, rating: index1 + 1});
+          setRating(index1 + 1);
           stars.forEach((star2, index2) =>{
             if(index2 <= index1){
               star2.classList.add('active-star');
@@ -55,7 +56,7 @@ export default function AddReview({setShowPopup, movieId}) {
 
   async function handleSubmit(){
     try{
-      await MovieService.addReview(review, token);
+      await MovieService.addReview({...review, rating: rating}, token);
       window.location.reload();
     }catch(err){
       console.log(err.response.data);

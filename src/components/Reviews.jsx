@@ -1,6 +1,10 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react";
+import { TokenContext, UserContext } from "../util/contexts";
+import MovieService from "../services/movie-service";
 
 export default function Reviews({reviews}) {
+  const {userId} = useContext(UserContext);
+  const {token} = useContext(TokenContext);
 
   useEffect(() =>{
     reviews.forEach(review => {
@@ -10,6 +14,17 @@ export default function Reviews({reviews}) {
         }
     });
   }, [reviews]);
+
+  async function deleteReview(review){
+    if(window.confirm('Do you want to delete your review?')){
+        try{
+            await MovieService.deleteReview(review, token);
+            window.location.reload();
+        }catch(err){
+            console.log(err);
+        }
+    }
+  }
 
   return (
     <div>
@@ -31,6 +46,7 @@ export default function Reviews({reviews}) {
                     </div>
                 </div>
                 <p className="description">{review.content}</p>
+                {userId === review.userId && <button onClick={() => deleteReview(review)} id="delete-review-btn" className="delete-btn">Delete Review</button>}
                 <br/>
                 {index + 1 < reviews.length && <hr/>}
             </div>

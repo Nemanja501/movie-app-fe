@@ -9,11 +9,13 @@ import NotFound from "./pages/NotFound";
 import AddMovie from "./pages/admin/AddMovie";
 import SingleMovie from "./pages/SingleMovie";
 import AddDirector from "./pages/admin/AddDirector";
-import Director from "./pages/Director";
+import SingleDirector from "./pages/SingleDirector";
 import AddActor from "./pages/admin/AddActor";
-import Actor from "./pages/Actor";
+import SingleActor from "./pages/SingleActor";
 import Watchlist from "./pages/Watchlist";
 import WatchedMovies from "./pages/WatchedMovies";
+import Actors from "./pages/Actors";
+import Directors from "./pages/Directors";
 
 export default function Router() {
   const {token} = useContext(TokenContext);
@@ -24,9 +26,11 @@ export default function Router() {
           <Navigation/>
           <Routes>
               <Route path="/" element={<Home/>} />
+              <Route path="/actors/" element={<Actors/>} />
+              <Route path="/directors/" element={<Directors/>} />
               <Route path="/movies/:id" element={<SingleMovie/>} />
-              <Route path="/directors/:id" element={<Director/>} />
-              <Route path="/actors/:id" element={<Actor/>} />
+              <Route path="/directors/:id" element={<SingleDirector/>} />
+              <Route path="/actors/:id" element={<SingleActor/>} />
               {isAdmin && <>
                 <Route path="/add-movie" element={<AddMovie/>} />
                 <Route path="/add-director" element={<AddDirector/>} />
